@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application User Creation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    :root {
+      --saradar-red: #8C1C27;
+      --saradar-red-600: #7a1820;
+      --bg-start: #f7f7f9;
+      --bg-end: #fff7f7;
+      --card: #ffffff;
+    }
+    body {
+      background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--saradar-red), var(--saradar-red-600));
+      color: #fff;
+      text-align: center;
+      padding-bottom: 60px;
+    }
+    .brand-logo img {
+      height: 140px; /* Bigger logo */
+      width: auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 12px 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+    .hero h1.title {
+      color: #fff;
+      font-weight: 800;
+      font-size: 2.4rem;
+      margin-top: 25px;
+    }
+    .tagline {
+      color: #ffeaea;
+      font-size: 1.1rem;
+      margin-top: 10px;
+      font-style: italic;
+    }
+    .card {
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 14px 40px rgba(12,13,14,0.12);
+      background-color: var(--card);
+      max-width: 650px;
+      margin: -70px auto 40px auto;
+      position: relative;
+      z-index: 2;
+    }
+    .chips {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .chip {
+      background: var(--saradar-red);
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-weight: 600;
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      font-size: 0.9rem;
+    }
+    .field label.label {
+      font-weight: 600;
+      color: #333;
+    }
+    .input, .textarea {
+      border-radius: 12px;
+      border: 1px solid #ddd;
+    }
+    .input:focus, .textarea:focus {
+      border-color: var(--saradar-red);
+      box-shadow: 0 0 6px rgba(140,28,39,0.4);
+    }
+    button.button.is-primary {
+      background: var(--saradar-red);
+      border-radius: 25px;
+      font-weight: 600;
+    }
+    button.button.is-primary:hover {
+      background: var(--saradar-red-600);
+    }
+    button.button.is-danger {
+      border-radius: 25px;
+    }
+    #message {
+      display: none;
+      margin: 20px auto;
+      max-width: 600px;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Header -->
+  <section class="hero is-medium is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <div class="brand-logo">
+          <img src="logo.png" alt="Saradar Bank Logo" />
+        </div>
+        <h1 class="title">Application User Creation</h1>
+        <div class="tagline">Secure • Fast • Reliable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card Form -->
+  <div class="card">
+    <div class="chips">
+      <div class="chip">Bank Grade Security</div>
+      <div class="chip">Quick Setup</div>
+      <div class="chip">User Friendly</div>
+    </div>
+
+    <form id="form">
+      <div class="field">
+        <label class="label">Employee Name</label>
+        <div class="control">
+          <input class="input" type="text" name="Employee Name" placeholder="Employee Name" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="email" name="Email" placeholder="Enter Email" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control">
+          <input class="input" type="password" name="Password" placeholder="Enter Password" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Date of Birth</label>
+        <div class="control">
+          <input class="input" type="date" name="DOB" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Gender</label>
+        <div class="control">
+          <label class="radio"><input type="radio" name="Gender" value="Male" required> Male</label>
+          <label class="radio"><input type="radio" name="Gender" value="Female"> Female</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Additional Information</label>
+        <div class="control">
+          <textarea class="textarea" name="Notes" placeholder="Any additional information"></textarea>
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button type="submit" class="button is-primary" id="submit-button">Submit</button>
+        </div>
+        <div class="control">
+          <button type="button" class="button is-danger" onclick="form.reset(); messageDiv.style.display='none';">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="message"></div>
+
+  <script>
+    const form = document.getElementById("form");
+    const submitButton = document.getElementById("submit-button");
+    const messageDiv = document.getElementById("message");
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      messageDiv.textContent = "Submitting...";
+      messageDiv.style.display = "block";
+      messageDiv.style.backgroundColor = "#f7f7f7";
+      messageDiv.style.color = "#111";
+      submitButton.disabled = true;
+      submitButton.classList.add("is-loading");
+
+      try {
+        const formData = new FormData(this);
+        const formBody = new URLSearchParams(formData).toString();
+
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbxzjxw1sOGdWw3rsgHvWubDQtAeMH13TVuKH32Vx4itxbVOZsErlZD6mjZJGGo5odhKkA/exec",
+          {
+            method: "POST",
+            body: formBody,
+          }
+        );
+
+        messageDiv.textContent = "Data Submitted Successfully!";
+        messageDiv.style.backgroundColor = "#8C1C27"; // Saradar red
+        messageDiv.style.color = "#fff";
+        form.reset();
+
+      } catch (error) {
+        console.error("Error:", error);
+        messageDiv.textContent = "Error: " + error.message;
+        messageDiv.style.backgroundColor = "#f14668";
+        messageDiv.style.color = "#fff";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.classList.remove("is-loading");
+        setTimeout(() => { messageDiv.style.display = "none"; }, 4000);
+      }
+    });
+  </script>
+</body>
+</html>
