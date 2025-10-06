@@ -8,125 +8,115 @@
   <style>
     :root {
       --saradar-red: #8C1C27;
-      --saradar-red-600: #7a1820;
-      --bg-start: #f7f7f9;
-      --bg-end: #fff7f7;
-      --card: #ffffff;
+      --saradar-red-dark: #7a1820;
+      --border-color: #ccc;
+      --bg: #ffffff;
+      --text: #222;
     }
+
     body {
-      background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
-      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
-      padding: 0;
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
       margin: 0;
+      padding: 20px;
     }
+
     .hero {
-      background: linear-gradient(135deg, var(--saradar-red), var(--saradar-red-600));
+      background-color: var(--saradar-red);
       color: #fff;
       text-align: center;
-      padding-bottom: 60px;
+      padding: 20px 10px;
     }
+
     .brand-logo img {
-      height: 140px;
+      height: 80px;
       width: auto;
       background: #fff;
-      border-radius: 20px;
-      padding: 12px 18px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      border-radius: 10px;
+      padding: 6px 10px;
+      margin-bottom: 10px;
     }
+
     .hero h1.title {
       color: #fff;
-      font-weight: 800;
-      font-size: 2.4rem;
-      margin-top: 25px;
+      font-weight: 700;
+      font-size: 1.6rem;
+      margin: 5px 0;
     }
+
     .tagline {
-      color: #ffeaea;
-      font-size: 1.1rem;
-      margin-top: 10px;
+      color: #f9dcdc;
+      font-size: 0.9rem;
       font-style: italic;
     }
+
     .card {
-      border-radius: 20px;
-      padding: 35px;
-      box-shadow: 0 14px 40px rgba(12,13,14,0.12);
-      background-color: var(--card);
-      max-width: 650px;
-      margin: -70px auto 40px auto;
-      position: relative;
-      z-index: 2;
+      background-color: var(--bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
     }
+
     .chips {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: none; /* Removed for minimal look */
     }
-    .chip {
-      background: var(--saradar-red);
-      border-radius: 20px;
-      padding: 8px 16px;
-      font-weight: 600;
-      color: #fff;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-      font-size: 0.9rem;
-    }
+
     .field label.label {
       font-weight: 600;
-      color: #333;
+      color: var(--text);
+      margin-bottom: 5px;
     }
+
     .input, .textarea {
-      border-radius: 12px;
-      border: 1px solid #ddd;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      box-shadow: none;
     }
+
     .input:focus, .textarea:focus {
       border-color: var(--saradar-red);
-      box-shadow: 0 0 6px rgba(140,28,39,0.4);
+      box-shadow: 0 0 2px rgba(140, 28, 39, 0.4);
     }
+
     button.button.is-primary {
-      background: var(--saradar-red);
-      border-radius: 25px;
+      background-color: var(--saradar-red);
+      border-radius: 4px;
+      border: none;
+      color: #fff;
       font-weight: 600;
+      padding: 8px 20px;
     }
+
     button.button.is-primary:hover {
-      background: var(--saradar-red-600);
+      background-color: var(--saradar-red-dark);
     }
+
     button.button.is-danger {
-      border-radius: 25px;
+      border-radius: 4px;
     }
+
     #message {
       display: none;
-      margin: 20px auto;
-      max-width: 600px;
-      padding: 12px;
-      border-radius: 8px;
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
       font-weight: bold;
       text-align: center;
     }
   </style>
 </head>
 <body>
-  <!-- Hero Header -->
-  <section class="hero is-medium is-bold">
-    <div class="hero-body">
-      <div class="container">
-        <div class="brand-logo">
-          <img src="logo.png" alt="Saradar Bank Logo" />
-        </div>
-        <h1 class="title">Application User Creation</h1>
-        <div class="tagline">Secure • Fast • Reliable</div>
-      </div>
+  <section class="hero">
+    <div class="brand-logo">
+      <img src="logo.png" alt="Saradar Bank Logo" />
     </div>
+    <h1 class="title">Application User Creation</h1>
+    <div class="tagline">Secure • Fast • Reliable</div>
   </section>
 
-  <!-- Card Form -->
   <div class="card">
-    <div class="chips">
-      <div class="chip">Bank Grade Security</div>
-      <div class="chip">Quick Setup</div>
-      <div class="chip">User Friendly</div>
-    </div>
-
     <form id="form">
       <div class="field">
         <label class="label">Employee Name</label>
@@ -180,9 +170,9 @@
         </div>
       </div>
     </form>
-  </div>
 
-  <div id="message"></div>
+    <div id="message"></div>
+  </div>
 
   <script>
     const form = document.getElementById("form");
@@ -194,13 +184,11 @@
 
       messageDiv.textContent = "Submitting...";
       messageDiv.style.display = "block";
-      messageDiv.style.backgroundColor = "#f7f7f7";
+      messageDiv.style.backgroundColor = "#f0f0f0";
       messageDiv.style.color = "#111";
       submitButton.disabled = true;
-      submitButton.classList.add("is-loading");
 
       try {
-        // Use URLSearchParams for IE/Citrix compatibility
         const formData = new FormData(form);
         const formBody = new URLSearchParams(formData).toString();
 
@@ -221,15 +209,12 @@
         } else {
           throw new Error("Submission failed");
         }
-
       } catch (error) {
-        console.error("Error:", error);
         messageDiv.textContent = "Error: " + error.message;
         messageDiv.style.backgroundColor = "#f14668";
         messageDiv.style.color = "#fff";
       } finally {
         submitButton.disabled = false;
-        submitButton.classList.remove("is-loading");
         setTimeout(() => { messageDiv.style.display = "none"; }, 4000);
       }
     });
